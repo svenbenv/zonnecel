@@ -7,8 +7,10 @@ readme = "README.md"
 packages = [{include = "zonnecel", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.10,<3.13"
 numpy = "^1.26.2"
+pyside6 = "^6.6.1"
+pyqtgraph = "^0.13.3"
 
 
 [build-system]
