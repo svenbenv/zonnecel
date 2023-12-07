@@ -4,6 +4,7 @@ import numpy as np
 import pyqtgraph as pg
 from PySide6 import QtWidgets
 from PySide6.QtCore import Slot
+from model import zonnecel_experiment
 
 #from  import 
 
@@ -102,11 +103,11 @@ class UserInterface(QtWidgets.QMainWindow):
         clear_button.clicked.connect(self.clear)
         Quit_button.clicked.connect(self.close)
 #@Slot
-    def UI_plot():
+    def UI_plot(self):
         """plot UI-diagram
         """
         self.plot_widget.clear() 
-        measurement = DiodeExperiment(port = self.selectAD.currentText())
+        measurement = zonnecel_experiment(port = self.selectAD.currentText())
         self.voltageLED, self.amperage, self.Aerror, self.Verror = measurement.scan(
             start=int(self.start_value.value() / 3.3 * 1024), 
             stop= int(self.stop_value.value()/ 3.3 * 1024),

@@ -6,7 +6,7 @@ from zonnecel.controller import ArduinoVISADevice, list_devices
 
 
 # In this class an experiment is done n times and errors and averages are calculated.
-class DiodeExperiment:
+class zonnecel_experiment:
     """In this class the port is chosen and the mean values and standard deviations of I and U are calculated and put in lists."""
 
     def __init__(self, start, stop, n):
