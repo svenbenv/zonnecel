@@ -97,13 +97,22 @@ class UserInterface(QtWidgets.QMainWindow):
 
 
         #clicked
-
+        #graph_button.clicked.connect(self.Diodescan)
+        save_button.clicked.connect(self.save_data)
+        clear_button.clicked.connect(self.clear)
+        Quit_button.clicked.connect(self.close)
 #@Slot
     def UI_plot():
         """plot UI-diagram
         """
         # self.plot_widget.setLabel("left", "Voltage in V")
         # self.plot_widget.setLabel("bottom", "Current in A")
+    
+    def clear(self):
+        """
+        clear up the plot widget
+        """
+        self.plot_widget.clear() 
     
     def save_data(self):
         """
