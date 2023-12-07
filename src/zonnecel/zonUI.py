@@ -107,19 +107,24 @@ class UserInterface(QtWidgets.QMainWindow):
         """plot UI-diagram
         """
         self.plot_widget.clear() 
+<<<<<<< Updated upstream
         measurement = zonnecel_experiment(port = self.selectplot.currentText())
         self.voltageLED, self.amperage, self.Aerror, self.Verror = measurement.scan(
+=======
+        measurement = zonnecel_experiment(port = self.selectAD.currentText())
+        self.average_U_list, self.average_I_list, self.I_error, self.U_error = measurement.scan(
+>>>>>>> Stashed changes
             start=int(self.start_value.value() / 3.3 * 1024), 
             stop= int(self.stop_value.value()/ 3.3 * 1024),
             n=self.repeat_times.value())
 
-        # plot voltageLED over amperage
+        # plot average_U_list over average_I_list
         
         self.plot_widget.setLabel("left", "Voltage in V")
         self.plot_widget.setLabel("bottom", "Current in A")
 
-        self.plot_widget.plot(self.voltageLED, self.amperage, symbol="o", symbolSize=5, pen=None)
-        error_bars = pg.ErrorBarItem(x=np.array(self.voltageLED), y=np.array(self.amperage), width=2 * np.array(self.Verror), height=2 * np.array(self.Aerror))
+        self.plot_widget.plot(self.average_U_list, self.average_I_list, symbol="o", symbolSize=5, pen=None)
+        error_bars = pg.ErrorBarItem(x=np.array(self.average_U_list), y=np.array(self.average_I_list), width=2 * np.array(self.U_error), height=2 * np.array(self.I_error))
         self.plot_widget.addItem(error_bars)
 
         #close device
@@ -141,7 +146,7 @@ class UserInterface(QtWidgets.QMainWindow):
         with open(f"{filename}", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(["V", "A","V_err","A_err"])
-            for a, b, c, d in zip(self.voltageLED, self.amperage, self.Verror, self.Aerror):
+            for a, b, c, d in zip(self.average_U_list, self.average_I_list, self.U_error, self.I_error):
                 writer.writerow([a, b, c, d])
 
 def main():
