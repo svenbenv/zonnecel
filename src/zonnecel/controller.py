@@ -1,5 +1,7 @@
-import pyvisa
-
+try:
+    from nsp2visasim import sim_pyvisa as pyvisa
+except ModuleNotFoundError:
+    import pyvisa
 
 # In this class the arduino device is defined and binary voltages are converted to voltages in units of volts
 class ArduinoVISADevice:
