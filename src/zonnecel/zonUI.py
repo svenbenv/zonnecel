@@ -97,7 +97,7 @@ class UserInterface(QtWidgets.QMainWindow):
 
 
         #clicked
-        #graph_button.clicked.connect(self.Diodescan)
+        graph_button.clicked.connect(self.UI_plot)
         save_button.clicked.connect(self.save_data)
         clear_button.clicked.connect(self.clear)
         Quit_button.clicked.connect(self.close)
@@ -105,8 +105,25 @@ class UserInterface(QtWidgets.QMainWindow):
     def UI_plot():
         """plot UI-diagram
         """
-        # self.plot_widget.setLabel("left", "Voltage in V")
-        # self.plot_widget.setLabel("bottom", "Current in A")
+        self.plot_widget.clear() 
+        measurement = DiodeExperiment(port = self.selectAD.currentText())
+        self.voltageLED, self.amperage, self.Aerror, self.Verror = measurement.scan(
+            start=int(self.start_value.value() / 3.3 * 1024), 
+            stop= int(self.stop_value.value()/ 3.3 * 1024),
+            n=self.repeat_times.value())
+
+        # plot voltageLED over amperage
+        
+        self.plot_widget.setLabel("left", "Voltage in V")
+        self.plot_widget.setLabel("bottom", "Current in A")
+
+        self.plot_widget.plot(self.voltageLED, self.amperage, symbol="o", symbolSize=5, pen=None)
+        error_bars = pg.ErrorBarItem(x=np.array(self.voltageLED), y=np.array(self.amperage), width=2 * np.array(self.Verror), height=2 * np.array(self.Aerror))
+        self.plot_widget.addItem(error_bars)
+
+        #close device
+        measurement.close()
+
     
     def clear(self):
         """
