@@ -2,7 +2,7 @@ import math
 
 import numpy
 
-from pythondaq.arduino_device import ArduinoVISADevice, list_devices
+from zonnecel.controller import ArduinoVISADevice, list_devices
 
 
 # In this class an experiment is done n times and errors and averages are calculated.
