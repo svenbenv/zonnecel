@@ -107,7 +107,7 @@ class UserInterface(QtWidgets.QMainWindow):
         """plot UI-diagram
         """
         self.plot_widget.clear() 
-        measurement = zonnecel_experiment(port = self.selectAD.currentText())
+        measurement = zonnecel_experiment(port = self.selectplot.currentText())
         self.voltageLED, self.amperage, self.Aerror, self.Verror = measurement.scan(
             start=int(self.start_value.value() / 3.3 * 1024), 
             stop= int(self.stop_value.value()/ 3.3 * 1024),
