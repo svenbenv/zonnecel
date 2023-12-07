@@ -107,13 +107,8 @@ class UserInterface(QtWidgets.QMainWindow):
         """plot UI-diagram
         """
         self.plot_widget.clear() 
-<<<<<<< Updated upstream
-        measurement = zonnecel_experiment(port = self.selectplot.currentText())
-        self.voltageLED, self.amperage, self.Aerror, self.Verror = measurement.scan(
-=======
-        measurement = zonnecel_experiment(port = self.selectAD.currentText())
+        measurement = zonnecel_experiment(plot = self.selectplot.currentText())
         self.average_U_list, self.average_I_list, self.I_error, self.U_error = measurement.scan(
->>>>>>> Stashed changes
             start=int(self.start_value.value() / 3.3 * 1024), 
             stop= int(self.stop_value.value()/ 3.3 * 1024),
             n=self.repeat_times.value())
