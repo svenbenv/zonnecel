@@ -35,7 +35,7 @@ class zonnecel_experiment:
         self.U_error = []
         self.I_error = []
 
-    def scan(self,chosen_port, plot):
+    def scan(self, chosen_port, plot):
 
         """Calculates averages and standard deviations of voltages and currents (in SI-units) by repeating experiment n times.
 
