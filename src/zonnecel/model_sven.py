@@ -2,11 +2,10 @@ import math
 
 import numpy
 
-from zonnecel.controller import ArduinoVISADevice, list_devices
+from zonnecel.controller_sven import ArduinoVISADevice, list_devices
 
 
-# In this class an experiment is done n times and errors and averages are calculated.
-class zonnecel_experiment:
+class DiodeExperiment:
     """In this class the port is chosen and the mean values and standard deviations of I and U are calculated and put in lists."""
 
     def __init__(self, start, stop, n):
@@ -35,7 +34,7 @@ class zonnecel_experiment:
         self.U_error = []
         self.I_error = []
 
-    def scan(self,chosen_port):
+    def scan(self, chosen_port):
 
         """Calculates averages and standard deviations of voltages and currents (in SI-units) by repeating experiment n times.
 
@@ -45,11 +44,6 @@ class zonnecel_experiment:
             error_U: Standard deviations of average voltages.
             error_I: Standard deviations of average currents.
         """
-
-
-
-
-
         print(list_devices())
         port = chosen_port
         device = ArduinoVISADevice(port=port)
@@ -79,11 +73,8 @@ class zonnecel_experiment:
             self.average_I_list.append(average_I)
             error_I = numpy.std(self.separate_I_LED) / math.sqrt(self.n)
             self.I_error.append(error_I)
-            
-        
-            
-        device.turn_off_device()
 
+        device.turn_off_device()
 
         return self.average_U_list, self.average_I_list, error_U, error_I
 

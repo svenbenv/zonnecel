@@ -4,9 +4,8 @@ import numpy as np
 import pyqtgraph as pg
 from PySide6 import QtWidgets
 from PySide6.QtCore import Slot
-from MEmodel import zonnecel_experiment
-
-#from  import 
+from model import zonnecel_experiment
+from controller import list_devices
 
 
 # PyQtGraph global options
@@ -75,14 +74,14 @@ class UserInterface(QtWidgets.QMainWindow):
         hboxcombo.addWidget(self.selectplot)
 
 
-        #poort comboButton
+        # # poort comboButton
         # self.selectAD = QtWidgets.QComboBox()
         # poort = list_devices()
         # for item in poort:
         #     self.selectAD.addItem(item)
         # hbox2.addWidget(self.selectAD)
 
-        #Push buttons
+        # # Push buttons
 
     
         #labels
