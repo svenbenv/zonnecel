@@ -35,7 +35,7 @@ class zonnecel_experiment:
         self.U_error = []
         self.I_error = []
 
-    def scan(self,chosen_port, plot):
+    def scan(self,chosen_port):
 
         """Calculates averages and standard deviations of voltages and currents (in SI-units) by repeating experiment n times.
 
@@ -49,44 +49,40 @@ class zonnecel_experiment:
 
 
 
-        if plot == "UI":
 
-            print(list_devices())
-            port = chosen_port
-            device = ArduinoVISADevice(port=port)
+        print(list_devices())
+        port = chosen_port
+        device = ArduinoVISADevice(port=port)
 
-            voltage_range = int(((self.stop - self.start) * 1023) / 3.3)
-            for i in numpy.linspace(self.start, self.stop, voltage_range):
+        voltage_range = int(((self.stop - self.start) * 1023) / 3.3)
+        for i in numpy.linspace(self.start, self.stop, voltage_range):
 
-                self.separate_U_LED = []
-                self.separate_I_LED = []
+            self.separate_U_LED = []
+            self.separate_I_LED = []
 
-                for j in range(0, self.n):
+            for j in range(0, self.n):
 
-                    device.set_output_value(value=i)
-                    U1 = device.get_input_voltage(channel=1)
-                    U_resistance_volt = device.get_input_voltage(channel=2)
-                    U_LED_volt = U1 - U_resistance_volt
-                    I_LED_ampere = U_resistance_volt / 220
-                    # These formulae follow out of Ohm's law.
-                    self.separate_U_LED.append(U_LED_volt)
-                    self.separate_I_LED.append(I_LED_ampere)
+                device.set_output_value(value=i)
+                U1 = device.get_input_voltage(channel=1)
+                U_resistance_volt = device.get_input_voltage(channel=2)
+                U_LED_volt = U1 - U_resistance_volt
+                I_LED_ampere = U_resistance_volt / 220
+                # These formulae follow out of Ohm's law.
+                self.separate_U_LED.append(U_LED_volt)
+                self.separate_I_LED.append(I_LED_ampere)
 
-                average_U = numpy.mean(self.separate_U_LED)
-                self.average_U_list.append(average_U)
-                error_U = numpy.std(self.separate_U_LED) / math.sqrt(self.n)
-                self.U_error.append(error_U)
-                average_I = numpy.mean(self.separate_I_LED)
-                self.average_I_list.append(average_I)
-                error_I = numpy.std(self.separate_I_LED) / math.sqrt(self.n)
-                self.I_error.append(error_I)
-                
+            average_U = numpy.mean(self.separate_U_LED)
+            self.average_U_list.append(average_U)
+            error_U = numpy.std(self.separate_U_LED) / math.sqrt(self.n)
+            self.U_error.append(error_U)
+            average_I = numpy.mean(self.separate_I_LED)
+            self.average_I_list.append(average_I)
+            error_I = numpy.std(self.separate_I_LED) / math.sqrt(self.n)
+            self.I_error.append(error_I)
             
-                
-            device.turn_off_device()
-
-        if plot == "PR":
-            p = 1
+        
+            
+        device.turn_off_device()
 
 
         return self.average_U_list, self.average_I_list, error_U, error_I
