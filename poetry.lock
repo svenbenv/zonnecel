@@ -139,6 +139,29 @@ files = [
 typing-extensions = "*"
 
 [[package]]
+name = "pyvisa-py"
+version = "0.7.1"
+description = "Pure Python implementation of a VISA library."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "PyVISA-py-0.7.1.tar.gz", hash = "sha256:d0dd824055fd8cab8a2685d10e1277d52ad19604322fa53c17b47e70258d4594"},
+    {file = "PyVISA_py-0.7.1-py3-none-any.whl", hash = "sha256:3675aa9fcabfcee6fbcc1e596f565c2538ecd0f69e7061f479d147b4afbd8c75"},
+]
+
+[package.dependencies]
+pyvisa = ">=1.13.0"
+typing-extensions = "*"
+
+[package.extras]
+gpib-ctypes = ["gpib-ctypes (>=0.3.0)"]
+hislip-discovery = ["zeroconf"]
+psutil = ["psutil"]
+serial = ["pyserial (>=3.0)"]
+usb = ["pyusb"]
+vicp = ["pyvicp", "zeroconf"]
+
+[[package]]
 name = "shiboken6"
 version = "6.6.1"
 description = "Python/C++ bindings helper module"
@@ -165,4 +188,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "b4331f7d5e835b876d152fa5ac9c4405d402cc7d32618c310bd757ae6d22143d"
+content-hash = "2c402cdbdfd0be35180b8bf58031ca1d0a4f399e82a64f42ebcaa3b8d4ec160e"

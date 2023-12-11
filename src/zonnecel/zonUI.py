@@ -7,8 +7,6 @@ from PySide6.QtCore import Slot
 from model import zonnecel_experiment
 from controller import list_devices
 
-#from  import 
-
 
 # PyQtGraph global options
 pg.setConfigOption("background", "w")
