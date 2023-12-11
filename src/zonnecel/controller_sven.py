@@ -65,7 +65,7 @@ class ArduinoVISADevice:
             input_voltage: Calculates voltage for given channel.
         """
 
-        self.input_voltage = int(self.device.query(f"MEAS:CH{channel}?")) * (3.3 / 1024)
+        self.input_voltage = int(self.device.query(f"MEAS:CH{channel}?"))
 
         return self.input_voltage
 

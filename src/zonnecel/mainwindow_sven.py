@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+
+################################################################################
+## Form generated from reading UI file 'mainwindow.ui'
+##
+## Created by: Qt User Interface Compiler version 6.6.1
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
+
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
@@ -32,10 +42,47 @@ class Ui_MainWindow(object):
 
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
+        self.number = QSpinBox(self.verticalLayoutWidget)
+        self.number.setObjectName(u"number")
+        self.number.setMinimum(1)
+        self.number.setMaximum(10)
+        self.number.setValue(3)
+
+        self.gridLayout.addWidget(self.number, 3, 2, 1, 1)
+
+        self.label_4 = QLabel(self.verticalLayoutWidget)
+        self.label_4.setObjectName(u"label_4")
+
+        self.gridLayout.addWidget(self.label_4, 4, 0, 1, 1)
+
         self.label_2 = QLabel(self.verticalLayoutWidget)
         self.label_2.setObjectName(u"label_2")
 
         self.gridLayout.addWidget(self.label_2, 2, 0, 1, 1)
+
+        self.final_value = QDoubleSpinBox(self.verticalLayoutWidget)
+        self.final_value.setObjectName(u"final_value")
+        self.final_value.setDecimals(2)
+        self.final_value.setMaximum(3.000000000000000)
+        self.final_value.setSingleStep(0.100000000000000)
+        self.final_value.setValue(3.000000000000000)
+
+        self.gridLayout.addWidget(self.final_value, 2, 2, 1, 1)
+
+        self.port_name = QComboBox(self.verticalLayoutWidget)
+        self.port_name.setObjectName(u"port_name")
+
+        self.gridLayout.addWidget(self.port_name, 4, 2, 1, 1)
+
+        self.save_button = QPushButton(self.verticalLayoutWidget)
+        self.save_button.setObjectName(u"save_button")
+
+        self.gridLayout.addWidget(self.save_button, 0, 2, 1, 1)
+
+        self.start_button = QPushButton(self.verticalLayoutWidget)
+        self.start_button.setObjectName(u"start_button")
+
+        self.gridLayout.addWidget(self.start_button, 0, 0, 1, 1)
 
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -50,53 +97,26 @@ class Ui_MainWindow(object):
         self.initial_value = QDoubleSpinBox(self.verticalLayoutWidget)
         self.initial_value.setObjectName(u"initial_value")
         self.initial_value.setDecimals(2)
-        self.initial_value.setMaximum(3.300000000000000)
+        self.initial_value.setMaximum(4.700000000000000)
         self.initial_value.setSingleStep(0.100000000000000)
         self.initial_value.setStepType(QAbstractSpinBox.DefaultStepType)
 
         self.gridLayout.addWidget(self.initial_value, 1, 2, 1, 1)
-
-        self.save_button = QPushButton(self.verticalLayoutWidget)
-        self.save_button.setObjectName(u"save_button")
-
-        self.gridLayout.addWidget(self.save_button, 0, 2, 1, 1)
 
         self.label = QLabel(self.verticalLayoutWidget)
         self.label.setObjectName(u"label")
 
         self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
 
-        self.start_button = QPushButton(self.verticalLayoutWidget)
-        self.start_button.setObjectName(u"start_button")
+        self.label_5 = QLabel(self.verticalLayoutWidget)
+        self.label_5.setObjectName(u"label_5")
 
-        self.gridLayout.addWidget(self.start_button, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_5, 5, 0, 1, 1)
 
-        self.number = QSpinBox(self.verticalLayoutWidget)
-        self.number.setObjectName(u"number")
-        self.number.setMinimum(1)
-        self.number.setMaximum(10)
-        self.number.setValue(3)
+        self.characteristic = QComboBox(self.verticalLayoutWidget)
+        self.characteristic.setObjectName(u"characteristic")
 
-        self.gridLayout.addWidget(self.number, 3, 2, 1, 1)
-
-        self.final_value = QDoubleSpinBox(self.verticalLayoutWidget)
-        self.final_value.setObjectName(u"final_value")
-        self.final_value.setDecimals(2)
-        self.final_value.setMaximum(3.300000000000000)
-        self.final_value.setSingleStep(0.100000000000000)
-        self.final_value.setValue(3.300000000000000)
-
-        self.gridLayout.addWidget(self.final_value, 2, 2, 1, 1)
-
-        self.port_name = QComboBox(self.verticalLayoutWidget)
-        self.port_name.setObjectName(u"port_name")
-
-        self.gridLayout.addWidget(self.port_name, 4, 2, 1, 1)
-
-        self.label_4 = QLabel(self.verticalLayoutWidget)
-        self.label_4.setObjectName(u"label_4")
-
-        self.gridLayout.addWidget(self.label_4, 4, 0, 1, 1)
+        self.gridLayout.addWidget(self.characteristic, 5, 2, 1, 1)
 
 
         self.verticalLayout.addLayout(self.gridLayout)
@@ -117,10 +137,12 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Final value", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Number of measurements", None))
-        self.save_button.setText(QCoreApplication.translate("MainWindow", u"Save as csv-file", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Initial value", None))
-        self.start_button.setText(QCoreApplication.translate("MainWindow", u"Start experiment", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Port name", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Final value", None))
+        self.save_button.setText(QCoreApplication.translate("MainWindow", u"Save as csv-file", None))
+        self.start_button.setText(QCoreApplication.translate("MainWindow", u"Start experiment", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Number of measurements", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Initial value", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Function", None))
     # retranslateUi
+

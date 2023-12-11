@@ -33,6 +33,8 @@ class UserInterface(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.port_name.addItems(list_devices())
+        item = ["UI", "PR"]
+        self.ui.characteristic.addItems(item)
 
         self.ui.start_button.clicked.connect(self.ui.plot_widget.clear)
         self.ui.start_button.clicked.connect(self.plot)
@@ -40,31 +42,57 @@ class UserInterface(QtWidgets.QMainWindow):
 
     def plot(self):
         """The plot function is defined, where the user can choose the range and number of experiments."""
+        if self.ui.characteristic.currentText() == "UI":
+            self.diode = DiodeExperiment(
+                self.ui.initial_value.value(),
+                self.ui.final_value.value(),
+                self.ui.number.value(),
+            )
+            self.diode.scan(self.ui.port_name.currentText())
+            self.ui.plot_widget.plot(
+                self.diode.average_U_list,
+                self.diode.average_I_list,
+                symbol="o",
+                symbolSize=5,
+                pen=None,
+            )
+            self.ui.plot_widget.setLabel("left", "current in Ampère")
+            self.ui.plot_widget.setLabel("bottom", "voltage in Volt")
+            error_bars = pg.ErrorBarItem(
+                x=np.array(self.diode.average_U_list),
+                y=np.array(self.diode.average_I_list),
+                width=2 * np.array(self.diode.U_error),
+                height=2 * np.array(self.diode.I_error),
+            )
 
-        self.diode = DiodeExperiment(
-            self.ui.initial_value.value(),
-            self.ui.final_value.value(),
-            self.ui.number.value(),
-        )
-        self.diode.scan(self.ui.port_name.currentText())
-        self.ui.plot_widget.plot(
-            self.diode.average_U_list,
-            self.diode.average_I_list,
-            symbol="o",
-            symbolSize=5,
-            pen=None,
-        )
-        self.ui.plot_widget.setLabel("left", "current in Ampère")
-        self.ui.plot_widget.setLabel("bottom", "voltage in Volt")
-        error_bars = pg.ErrorBarItem(
-            x=np.array(self.diode.average_U_list),
-            y=np.array(self.diode.average_I_list),
-            width=2 * np.array(self.diode.U_error),
-            height=2 * np.array(self.diode.I_error),
-        )
+            self.ui.plot_widget.addItem(error_bars)
+            self.show()
 
-        self.ui.plot_widget.addItem(error_bars)
-        self.show()
+        if self.ui.characteristic.currentText() == "PR":
+            self.diode = DiodeExperiment(
+                self.ui.initial_value.value(),
+                self.ui.final_value.value(),
+                self.ui.number.value(),
+            )
+            self.diode.scan(self.ui.port_name.currentText())
+            self.ui.plot_widget.plot(
+                self.diode.average_R_list,
+                self.diode.average_P_list,
+                symbol="o",
+                symbolSize=5,
+                pen=None,
+            )
+            self.ui.plot_widget.setLabel("left", "power in Watt")
+            self.ui.plot_widget.setLabel("bottom", "resistance in Ohm")
+            error_bars = pg.ErrorBarItem(
+                x=np.array(self.diode.average_R_list),
+                y=np.array(self.diode.average_P_list),
+                width=2 * np.array(self.diode.R_error_list),
+                height=2 * np.array(self.diode.P_error_list),
+            )
+
+            self.ui.plot_widget.addItem(error_bars)
+            self.show()
 
     def save(self):
         """The save function is defined, where the data is saved in a csv-file."""
@@ -90,3 +118,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
